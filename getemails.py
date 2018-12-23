@@ -77,7 +77,7 @@ class EmailReader:
                 userId=user_id,id=message["id"],
                 body={"removeLabelIds":["UNREAD"]}).execute()
 
-            email_data.append([emailFrom, emailSub,thread, str(mime)])
+            email_data.append({'from':emailFrom,'subject':emailSub,'threadId':thread,'body':str(mime)})
             
         return email_data
         
