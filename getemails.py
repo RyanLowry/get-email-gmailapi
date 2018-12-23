@@ -73,15 +73,11 @@ class EmailReader:
             # Verify we get proper text using message_from_string
             mime = email.message_from_string(body)
 
-            # self.service.users().messages().modify(
-            #     userId=user_id,id=message["id"],
-            #     body={"removeLabelIds":["UNREAD"]}).execute()
+            self.service.users().messages().modify(
+                userId=user_id,id=message["id"],
+                body={"removeLabelIds":["UNREAD"]}).execute()
 
             email_data.append({'from':emailFrom,'subject':emailSub,'threadId':thread,'body':str(mime)})
-<<<<<<< HEAD
-=======
-            #email_data.append([emailFrom, emailSub,thread, str(mime)])
->>>>>>> 509e4cf2d6253aba5d3bf88d6947c5faa9d486c2
             
         return email_data
         
