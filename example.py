@@ -4,7 +4,7 @@ from getemails import EmailReader,ProcessData
 class App():
     def __init__(self):
         # email that will send emails
-        self.sender_email = "[Enter email here]"
+        self.sender_email = "[Enter Email here]"
         # Initialize emaiReader
         self.email = EmailReader()
         
@@ -22,15 +22,15 @@ class App():
             # Loop through all the email info
             for data in email_info:
                 
-                # parse and display body of email
-                email_text = ProcessData(data[3]).parse_data()
+                # Parse and display body of email
+                email_text = ProcessData(data['body']).parse_data()
                 print(email_text)
                 
-            # resend body text back to last email as a reply
+            # Resend body text back to last email as a reply
             message = self.email.generate_email(
-                str(email_text),email_info[-1][0],
-                self.sender_email,email_info[-1][1],
-                thread = email_info[-1][2])
+                str(email_text),email_info[-1]['from'],
+                self.sender_email,email_info[-1]['subject'],
+                thread = email_info[-1]['threadId'])
             
             self.email.send_email("me",message)
             
